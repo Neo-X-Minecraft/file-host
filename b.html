@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neo_X_Minecraft Bio</title>
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#content {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+h1 .notranslate {
+}
+p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.nav-button {
+  padding: 12px 24px;
+  background: #ff4757;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.nav-button:hover {
+  background: #e84118;
+}
+#rickrollVideo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 9999;
+  background: #000;
+}
+#google_translate_element { display: none; }
+</style>
+</head>
+<body>
+<div id="content">
+  <h1><span class="notranslate">Neo_X_Minecraft</span></h1>
+  <p>I like coding and playing games like Minecraft and Geometry Dash.</p>
+  <div class="nav-buttons">
+    <button class="nav-button">Twitter</button>
+    <button class="nav-button">YouTube</button>
+    <button class="nav-button">About Me</button>
+    <button class="nav-button">Blog</button>
+  </div>
+</div>
+<video id="rickrollVideo" preload="auto" playsinline>
+  <source src="https://neo-x-minecraft.github.io/file-host/v.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+const content = document.getElementById('content');
+const video = document.getElementById('rickrollVideo');
+const buttons = document.querySelectorAll('.nav-button');
+let videoStarted = false;
+function startVideo() {
+  if (videoStarted) return;
+  videoStarted = true;
+  content.style.display = 'none';
+  video.style.display = 'block';
+  video.play().catch(err => { console.error("Video play failed:", err); });
+}
+buttons.forEach(btn => {
+  btn.addEventListener('click', e => { e.preventDefault(); startVideo(); });
+});
+document.addEventListener('click', function() { startVideo(); }, { once: true });
+video.addEventListener('pause', function() { video.play().catch(err => console.error("Forced play error:", err)); });
+setInterval(() => { if (videoStarted && video.paused) { video.play().catch(err => console.error("Interval play error:", err)); } }, 1000);
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    const lang = navigator.language || navigator.userLanguage;
+    const langCode = lang.substr(0, 2);
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) { combo.value = langCode; combo.dispatchEvent(new Event('change')); }
+  }, 1000);
+});
+</script>
+</body>
+</html>
